@@ -30,7 +30,6 @@ export default {
   methods: {
     async validateToken() {
       this.validatingToken = true;
-
       const json = localStorage.getItem(userKey);
       const userData = JSON.parse(json);
       this.$store.commit("setUser", null);
@@ -40,7 +39,6 @@ export default {
         this.$router.push({ name: "auth" });
         return;
       }
-
       const res = await axios.post(`${baseApiUrl}/validateToken`, userData);
 
       if (res.data) {
