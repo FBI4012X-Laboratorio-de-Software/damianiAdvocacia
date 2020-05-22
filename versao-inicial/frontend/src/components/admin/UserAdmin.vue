@@ -9,7 +9,6 @@
               id="user-name"
               type="text"
               v-model="user.name"
-              required
               placeholder="Informe o nome do Usuário"
             />
           </b-form-group>
@@ -20,7 +19,6 @@
               id="user-email"
               type="text"
               v-model="user.email"
-              required
               placeholder="Informe o e-mail do Usuário"
             />
           </b-form-group>
@@ -33,7 +31,6 @@
               id="user-name"
               type="password"
               v-model="user.password"
-              required
               placeholder="Informe a senha"
             />
           </b-form-group>
@@ -44,7 +41,6 @@
               id="user-confirm-password"
               type="password"
               v-model="user.confirmPassword"
-              required
               placeholder="Confirme a senha"
             />
           </b-form-group>
@@ -115,7 +111,7 @@ export default {
         .delete(`${baseApiUrl}/users/${id}`)
         .then(() => {
           this.$toasted.global.defaultSuccess();
-          this.reset;
+          this.reset();
         })
         .catch(showError);
     },

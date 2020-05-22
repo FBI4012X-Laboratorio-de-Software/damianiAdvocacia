@@ -44,6 +44,7 @@ module.exports = app => {
         } catch (e) {
             //problemas com token
         }
+        return res.send(false)
     }
 
     return { signin, validateToken }
