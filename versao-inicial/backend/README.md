@@ -1,5 +1,5 @@
-# frontend
-
+# backend
+Necessário o Node e o client do pg
 ## Instalar projeto
 ```
 npm install
@@ -7,6 +7,6 @@ npm install
 
 ### Rodar o projeto
 ```
-npm run serve
+npm start
 ```
 
