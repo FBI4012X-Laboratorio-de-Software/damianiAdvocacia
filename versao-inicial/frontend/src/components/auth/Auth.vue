@@ -1,7 +1,7 @@
 <template>
   <div class="auth-content">
     <div class="auth-modal">
-      <img src="versao-inicial\frontend\src\assets\damiani.PNG" alt="Logo" />
+      <img src="@/assets/damianiLogo.jpg" height="1500px" alt="Logo" />
       <hr />
       <div class="auth-title">{{showSignup ? 'Cadastro' : 'Login'}}</div>
 
