@@ -51,6 +51,10 @@ export default {
         {
           text: "Dashboard",
           data: { name: "home", icon: "fa fa-home" }
+        },
+        {
+          text: "Agenda",
+          data: { name: "agenda", icon: "fa fa-calendar" }
         }
       ]);
     },
