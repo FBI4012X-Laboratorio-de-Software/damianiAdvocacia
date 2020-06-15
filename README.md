@@ -1,7 +1,7 @@
 ### Instalação do projeto
 
 ```bash
-# Usado o node 12.16.3
+# Usado o node 12.16.3, PostgreSQL 12.2
 
 # 1. Clonando o repositório
 $ git clone https://github.com/FBI4012X-Laboratorio-de-Software/damianiAdvocacia.git
