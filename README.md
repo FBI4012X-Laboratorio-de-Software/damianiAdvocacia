@@ -15,7 +15,7 @@ $ npm install
 Renomear o arquivo env_file para apenas .env e o configure de acordo com as suas escolhas.
 
 # 2.3. Banco de dados
-$ crie o banco de dados no postgres, com nome de 'advocacia'
+$ crie o banco de dados no postgres, com nome de 'advocacia'   
 $ O knex rodará todos os scripts de criação de tabelas automaticamente ao iniciar o servidor
 
 # 2.4. Rodando a aplicação em modo desenvolvimento

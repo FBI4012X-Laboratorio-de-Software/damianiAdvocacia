@@ -55,6 +55,10 @@ export default {
         {
           text: "Agenda",
           data: { name: "agenda", icon: "fa fa-calendar" }
+        },
+          {
+          text: "Cliente",
+          data: { name: "customer", icon: "fa fa-users" }
         }
       ]);
     },

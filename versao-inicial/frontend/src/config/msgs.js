@@ -17,3 +17,9 @@ Vue.toasted.register(
     payload => !payload.msg ? 'Oops.. Erro inesperado.' : payload.msg,
     { type : 'error', icon : 'times' }
 )
+
+Vue.toasted.register(
+    'erroCpf',
+    payload => !payload.msg ? 'CPF inválido' : payload.msg,
+    { type : 'error', icon : 'times' }
+)

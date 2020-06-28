@@ -13,4 +13,21 @@ module.exports = app => {
         .put(app.api.user.save)
         .get(app.api.user.getById)
         .delete(app.api.user.remove)
+
+    app.route('/customers')
+        .all(app.config.passport.authenticate())
+        .post(app.api.customer.save)
+        .get(app.api.customer.get)
+
+    app.route('/customers/:id')
+        .all(app.config.passport.authenticate())
+        .put(app.api.customer.save)
+        .get(app.api.customer.getById)
+        .delete(app.api.customer.remove)
+
+    app.route('/reminders')
+        .all(app.config.passport.authenticate())
+        .post(app.api.reminder.save)
+        .get(app.api.reminder.get)
+
 }

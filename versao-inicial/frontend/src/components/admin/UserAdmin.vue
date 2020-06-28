@@ -111,7 +111,7 @@ export default {
         .delete(`${baseApiUrl}/users/${id}`)
         .then(() => {
           this.$toasted.global.defaultSuccess();
-          this.reset;
+          this.reset();
         })
         .catch(showError);
     },
