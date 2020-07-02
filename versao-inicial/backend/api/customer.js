@@ -29,7 +29,6 @@ module.exports = app => {
     }
 
     const get = (req, res) => {
-        console.log('oi')
         app.db('customers')
             .select('id', 'name', 'cpfCnpj', 'tipoPessoa', 'telefone', 'email')
             .then(customers => res.json(customers))
