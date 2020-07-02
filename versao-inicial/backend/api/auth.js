@@ -1,6 +1,8 @@
-const { authSecret } = require('../.env')
+const { authSecret, passEmail, userEmail } = require('../.env')
 const jwt = require('jwt-simple')
 const bcrypt = require('bcrypt-nodejs')
+let nodemailer = require('nodemailer');
+let cron = require('node-cron');
 
 module.exports = app => {
     const signin = async (req, res) => {
@@ -10,6 +12,7 @@ module.exports = app => {
 
         const user = await app.db('users')
             .where({ email: req.body.email })
+            .whereNull('deletedAt')
             .first()
 
         if (!user) return res.status(400).send("Usuário não encontrado.")
@@ -25,6 +28,44 @@ module.exports = app => {
             iat: now,
             exp: now + (60 * 60 * 24)
         }
+        cron.schedule('* * * * *', () => {
+            app.db({ a: 'reminders', u: 'customers' })
+                .select('a.id', 'a.description', 'a.reminderDate', 'a.reminderHour', 'a.userId', { customer: 'u.name' })
+                .whereRaw('?? = ??', ['u.id', 'a.customer'])
+                .where({
+                    'a.reminderDate': new Date().toISOString().slice(0, 10),
+                    'a.userId': user.id
+                })
+                .then(async reminders => {
+                    console.log(reminders)
+                    if (typeof reminders !== 'undefined' && reminders.length > 0) {
+                        let text = "Você tem lembretes para hoje: \n"
+
+                        reminders.forEach(function (reminder) {
+                            text += `\t${reminder.description} as ${reminder.reminderHour.substring(0, 5)} com o cliente ${reminder.customer}\n`
+                        })
+                        let mailOptions = {
+                            from: userEmail,
+                            to: user.email,
+                            subject: 'Lembretes',
+                            text
+                        }
+
+                        let transporter = nodemailer.createTransport({
+                            service: 'gmail',
+                            auth: {
+                                user: userEmail,
+                                pass: passEmail
+                            }
+                        })
+
+                        transporter.sendMail(mailOptions, function (error, info) { });
+
+                        return true
+                    }
+                })
+                .catch()
+        })
 
         res.json({
             ...payload,

@@ -1,3 +1,5 @@
 module.exports = {
-    authSecret: '123456789'
+    authSecret: '123456789',
+    passEmail: '',
+    userEmail: ''
 }
