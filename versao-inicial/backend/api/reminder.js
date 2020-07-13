@@ -5,9 +5,12 @@ module.exports = app => {
         const reminder = { ...req.body }
         if (req.params.id) reminder.id = req.params.id
         reminder.userId = req.user.id
+
         try {
             existsOrError(reminder.description, 'Descrição não informada.')
-            existsOrError(reminder.reminderDate, 'Datanão informada.')
+            existsOrError(reminder.reminderDate, 'Data não informada.')
+            existsOrError(reminder.reminderHour, 'Hora não informada.')
+            existsOrError(reminder.customer, 'Cliente não informado.')
         } catch (msg) {
             return res.status(400).send(msg)
         }
@@ -27,10 +30,11 @@ module.exports = app => {
     }
 
     const get = (req, res) => {
+        console.log(req.body)
         app.db({ a: 'reminders', u: 'customers' })
             .select('a.id', 'a.description', 'a.reminderDate', 'a.reminderHour', { customer: 'u.name' }, { telefone: 'u.telefone' })
             .whereRaw('?? = ??', ['u.id', 'a.customer'])
-            .where({'a.reminderDate': new Date().toISOString().slice(0, 10)})
+            .where({ 'a.reminderDate': new Date().toISOString().slice(0, 10) })
             .then(async reminders => {
                 reminders.forEach(function (reminder) {
                     reminder.text = `${reminder.description} as ${reminder.reminderHour.substring(0, 5)} com o cliente ${reminder.customer}`
