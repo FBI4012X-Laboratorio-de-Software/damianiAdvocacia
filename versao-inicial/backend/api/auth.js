@@ -28,7 +28,7 @@ module.exports = app => {
             iat: now,
             exp: now + (60 * 60 * 24)
         }
-        cron.schedule('* * * * *', () => {
+        cron.schedule('* 6 * * *', () => {
             app.db({ a: 'reminders', u: 'customers' })
                 .select('a.id', 'a.description', 'a.reminderDate', 'a.reminderHour', 'a.userId', { customer: 'u.name' })
                 .whereRaw('?? = ??', ['u.id', 'a.customer'])
@@ -37,7 +37,6 @@ module.exports = app => {
                     'a.userId': user.id
                 })
                 .then(async reminders => {
-                    console.log(reminders)
                     if (typeof reminders !== 'undefined' && reminders.length > 0) {
                         let text = "Você tem lembretes para hoje: \n"
 
